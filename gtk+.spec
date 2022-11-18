@@ -1,9 +1,11 @@
 %global _install install -p -m0644
+%global vendor %{?_vendor:%{_vendor}}%{!?_vendor:openEuler}
+%global rpmvdir /usr/lib/rpm/%{vendor}
 
 Name:           gtk+
 Version:        1.2.10
 Epoch:          1
-Release:        91
+Release:        92
 Summary:        A toolkit for creating graphical user interfaces
 License:        LGPLv2+
 URL:            http://www.gtk.org/
@@ -75,7 +77,7 @@ Man pages and other related documents.
 %prep
 %autosetup -p1 -a 2
 
-cp -p /usr/lib/rpm/openEuler/config.{guess,sub} .
+cp -p %{rpmvdir}/config.{guess,sub} .
 
 %build
 %configure --disable-static --with-xinput=xfree --with-native-locale LIBTOOL=/usr/bin/libtool
@@ -136,6 +138,9 @@ make check LIBTOOL=/usr/bin/libtool
 %{_mandir}/man1/gtk-config.1*
 
 %changelog
+* Thu Nov 17 2022 wangkai <wangkai385@h-partners.com> - 1:1.2.10-92
+- Replace openEuler with vendor
+
 * Fri Jan 07 2022 wulei <wulei80@huawei.com> - 1.2.10-91
 - Fix config.guess and config.sub not found
 
