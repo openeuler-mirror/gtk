@@ -3,7 +3,7 @@
 Name:           gtk+
 Version:        1.2.10
 Epoch:          1
-Release:        91
+Release:        92
 Summary:        A toolkit for creating graphical user interfaces
 License:        LGPLv2+
 URL:            http://www.gtk.org/
@@ -78,12 +78,12 @@ Man pages and other related documents.
 cp -p /usr/lib/rpm/config.{guess,sub} .
 
 %build
-%configure --disable-static --with-xinput=xfree --with-native-locale LIBTOOL=/usr/bin/libtool
+%configure --disable-static --with-xinput=xfree --with-native-locale LIBTOOL="/usr/bin/libtool --tag=CC"
 
-%make_build LIBTOOL=/usr/bin/libtool
+%make_build LIBTOOL="/usr/bin/libtool --tag=CC"
 
 %install
-%make_install LIBTOOL=/usr/bin/libtool
+%make_install LIBTOOL="/usr/bin/libtool --tag=CC"
 
 ./mkinstalldirs tmpdocs/tutorial
 %_install docs/html/gtk_tut.html docs/html/gtk_tut-[0-9]*.html docs/html/*.gif tmpdocs/tutorial
@@ -136,6 +136,9 @@ make check LIBTOOL=/usr/bin/libtool
 %{_mandir}/man1/gtk-config.1*
 
 %changelog
+* Wed Apr 26 2023 Xiaoya Huang <huangxiaoya@iscas.ac.cn> - 1.2.10-92
+- Fix clang build error
+
 * Tue Oct 26 2021 chenchen <chen_aka_jan@163.com> - 1.2.10-91
 - change the spec file name to be the same as the repo name
 
